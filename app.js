@@ -28,6 +28,13 @@ app.get('/api/v1/books/:id', (req, res) => {
 
   const book = books.find((b) => b.id === id);
 
+  if (!book) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'invalid id',
+    });
+  }
+
   res.status(200).json({
     status: 'success',
     data: {
@@ -54,6 +61,39 @@ app.post('/api/v1/books', (req, res) => {
       });
     }
   );
+});
+
+app.patch('/api/v1/books/:id', (req, res) => {
+  const id = req.params.id * 1;
+
+  const book = books.find((b) => b.id === id);
+
+  if (!book) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'invalid id',
+    });
+  }
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      book: '<updated book>',
+    },
+  });
+});
+
+app.delete('/api/v1/books/:id', (req, res) => {
+  if (req.params.id * 1 > books.length - 1) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'invalid id',
+    });
+  }
+
+  res.status(204).json({
+    status: 'success',
+  });
 });
 
 // running application at particular port
