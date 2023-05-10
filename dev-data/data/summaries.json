@@ -1,0 +1,90 @@
+[
+  {
+    "_id": "5c88fa8cf4afda39709c2955",
+    "isbn": "8cf4afda397",
+    "name": "Deep Work",
+    "author": "Cal Newport",
+    "publisher": "Penguin Random House",
+    "publishedAt": "2021",
+    "synopWriter": "5c8a22c62f8fb814b56fa18b",
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 231,
+    "imageCover": "cover.jpg",
+    "readingTime": 25,
+    "categories": ["productivity", "selfhelp", "time management"],
+    "top quotes": [
+      "Excepteur sint occaecat cupidatat non proident",
+      "Lorem ipsum dolor sit amet",
+      "consectetur adipisicing elit"
+    ],
+    "totalWord": 20225,
+    "about": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2365",
+    "isbn": "8cf4afd37397",
+    "name": "Atomic Habit",
+    "author": "James Clear",
+    "publisher": "Penguin Random House",
+    "publishedAt": "2021",
+    "synopWriter": "5c8a22c64f8fb814b56fa19c",
+    "ratingsAverage": 4.2,
+    "ratingsQuantity": 221,
+    "imageCover": "cover.jpg",
+    "readingTime": 25,
+    "categories": ["productivity", "habit", "time management"],
+    "top quotes": [
+      "Excepteur sint occaecat cupidatat non proident",
+      "Lorem ipsum dolor sit amet",
+      "consectetur adipisicing elit"
+    ],
+    "totalWord": 20825,
+    "about": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2944",
+    "isbn": "8cf4afda344",
+    "name": "Make Time",
+    "author": "Jake Knapp",
+    "publisher": "Penguin Random House",
+    "publishedAt": "2020",
+    "synopWriter": "5c8a22c62f8fb814b56fa12d",
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 231,
+    "imageCover": "cover.jpg",
+    "readingTime": 25,
+    "categories": ["productivity", "selfhelp", "time management"],
+    "top quotes": [
+      "Excepteur sint occaecat cupidatat non proident",
+      "Lorem ipsum dolor sit amet",
+      "consectetur adipisicing elit"
+    ],
+    "totalWord": 20225,
+    "about": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  },
+  {
+    "_id": "5c88fa8cf4afda39709c2930",
+    "isbn": "8cf4afda397",
+    "name": "Digital Minimalism",
+    "author": "Cal Newport",
+    "publisher": "Penguin Random House",
+    "publishedAt": "2021",
+    "synopWriter": "5c8a22c62f8fb814b56fa18b",
+    "ratingsAverage": 4.8,
+    "ratingsQuantity": 231,
+    "imageCover": "cover.jpg",
+    "readingTime": 25,
+    "categories": ["productivity", "selfhelp", "time management"],
+    "top quotes": [
+      "Excepteur sint occaecat cupidatat non proident",
+      "Lorem ipsum dolor sit amet",
+      "consectetur adipisicing elit"
+    ],
+    "totalWord": 20225,
+    "about": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+    "description": "Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\nIrure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
+  }
+]
