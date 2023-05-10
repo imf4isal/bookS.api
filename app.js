@@ -3,11 +3,15 @@ const fs = require('fs');
 
 const app = express();
 
+//middleware
+app.use(express.json());
+
 // reading the dummy json data from files
 const books = JSON.parse(
-  fs.readFileSync(`${__dirname}/dev-data/data/summaries.json`)
+  fs.readFileSync(`${__dirname}/dev-data/data/summaries-simple.json`)
 );
 
+// get all the books
 app.get('/api/v1/books', (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -16,6 +20,26 @@ app.get('/api/v1/books', (req, res) => {
       books,
     },
   });
+});
+
+// add books data
+app.post('/api/v1/books', (req, res) => {
+  const newId = books[books.length - 1].id + 1;
+  const newBook = Object.assign({ id: newId }, req.body); // merging object
+
+  books.push(newBook);
+  fs.writeFile(
+    `${__dirname}/dev-data/data/summaries-simple.json`,
+    JSON.stringify(books),
+    (err) => {
+      res.status(201).json({
+        status: 'success',
+        data: {
+          book: newBook,
+        },
+      });
+    }
+  );
 });
 
 // running application at particular port
