@@ -1,0 +1,22 @@
+{
+  "name": "book-s",
+  "version": "1.0.0",
+  "description": "The largest book summary app for the book lovers by the book lovers.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/imf4isal/bookS.git"
+  },
+  "author": "Faisal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/imf4isal/bookS/issues"
+  },
+  "homepage": "https://github.com/imf4isal/bookS#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
