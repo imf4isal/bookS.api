@@ -11,8 +11,7 @@ const books = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/summaries-simple.json`)
 );
 
-// get all the books
-app.get('/api/v1/books', (req, res) => {
+const getAllBooks = (req, res) => {
   res.status(200).json({
     status: 'success',
     results: books.length,
@@ -20,10 +19,9 @@ app.get('/api/v1/books', (req, res) => {
       books,
     },
   });
-});
+};
 
-// get only one book data
-app.get('/api/v1/books/:id', (req, res) => {
+const getBook = (req, res) => {
   const id = req.params.id * 1;
 
   const book = books.find((b) => b.id === id);
@@ -41,10 +39,9 @@ app.get('/api/v1/books/:id', (req, res) => {
       book,
     },
   });
-});
+};
 
-// add books data
-app.post('/api/v1/books', (req, res) => {
+const createSummary = (req, res) => {
   const newId = books[books.length - 1].id + 1;
   const newBook = Object.assign({ id: newId }, req.body); // merging object
 
@@ -61,11 +58,10 @@ app.post('/api/v1/books', (req, res) => {
       });
     }
   );
-});
+};
 
-app.patch('/api/v1/books/:id', (req, res) => {
+const updateSummary = (req, res) => {
   const id = req.params.id * 1;
-
   const book = books.find((b) => b.id === id);
 
   if (!book) {
@@ -81,9 +77,9 @@ app.patch('/api/v1/books/:id', (req, res) => {
       book: '<updated book>',
     },
   });
-});
+};
 
-app.delete('/api/v1/books/:id', (req, res) => {
+const deleteSummary = (req, res) => {
   if (req.params.id * 1 > books.length - 1) {
     return res.status(404).json({
       status: 'fail',
@@ -93,8 +89,17 @@ app.delete('/api/v1/books/:id', (req, res) => {
 
   res.status(204).json({
     status: 'success',
+    data: null,
   });
-});
+};
+
+app.route('/api/v1/books').get(getAllBooks).post(createSummary);
+
+app
+  .route('/api/v1/books/:id')
+  .get(getBook)
+  .patch(updateSummary)
+  .delete(deleteSummary);
 
 // running application at particular port
 const port = 3000;
