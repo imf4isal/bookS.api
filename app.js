@@ -22,6 +22,20 @@ app.get('/api/v1/books', (req, res) => {
   });
 });
 
+// get only one book data
+app.get('/api/v1/books/:id', (req, res) => {
+  const id = req.params.id * 1;
+
+  const book = books.find((b) => b.id === id);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      book,
+    },
+  });
+});
+
 // add books data
 app.post('/api/v1/books', (req, res) => {
   const newId = books[books.length - 1].id + 1;
