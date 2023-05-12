@@ -2,16 +2,18 @@ const express = require('express');
 
 const bookControllers = require('../controllers/bookControllers');
 
-const bookRouter = express.Router();
+const router = express.Router();
 
-bookRouter
+router.param('id', bookControllers.checkIdValidation);
+
+router
   .route('/')
   .get(bookControllers.getAllBooks)
   .post(bookControllers.createSummary);
-bookRouter
+router
   .route('/:id')
   .get(bookControllers.getBook)
   .patch(bookControllers.updateSummary)
   .delete(bookControllers.deleteSummary);
 
-module.exports = bookRouter;
+module.exports = router;

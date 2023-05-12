@@ -5,6 +5,17 @@ const books = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/summaries-simple.json`)
 );
 
+exports.checkIdValidation = (req, res, next, val) => {
+  if (val > books.length - 1) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'invalid id',
+    });
+  }
+
+  next();
+};
+
 exports.getAllBooks = (req, res) => {
   res.status(200).json({
     status: 'success',
@@ -18,15 +29,7 @@ exports.getAllBooks = (req, res) => {
 
 exports.getBook = (req, res) => {
   const id = req.params.id * 1;
-
   const book = books.find((b) => b.id === id);
-
-  if (!book) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'invalid id',
-    });
-  }
 
   res.status(200).json({
     status: 'success',
@@ -57,16 +60,6 @@ exports.createSummary = (req, res) => {
 };
 
 exports.updateSummary = (req, res) => {
-  const id = req.params.id * 1;
-  const book = books.find((b) => b.id === id);
-
-  if (!book) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'invalid id',
-    });
-  }
-
   res.status(200).json({
     status: 'success',
     data: {
@@ -76,13 +69,6 @@ exports.updateSummary = (req, res) => {
 };
 
 exports.deleteSummary = (req, res) => {
-  if (req.params.id * 1 > books.length - 1) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'invalid id',
-    });
-  }
-
   res.status(204).json({
     status: 'success',
     data: null,
