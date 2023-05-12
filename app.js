@@ -6,6 +6,16 @@ const app = express();
 //middleware
 app.use(express.json());
 
+app.use((req, res, next) => {
+  console.log('hello.');
+  next();
+});
+
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  next();
+});
+
 // reading the dummy json data from files
 const books = JSON.parse(
   fs.readFileSync(`${__dirname}/dev-data/data/summaries-simple.json`)
@@ -14,6 +24,7 @@ const books = JSON.parse(
 const getAllBooks = (req, res) => {
   res.status(200).json({
     status: 'success',
+    requestedTime: req.requestTime,
     results: books.length,
     data: {
       books,
@@ -46,6 +57,7 @@ const createSummary = (req, res) => {
   const newBook = Object.assign({ id: newId }, req.body); // merging object
 
   books.push(newBook);
+
   fs.writeFile(
     `${__dirname}/dev-data/data/summaries-simple.json`,
     JSON.stringify(books),
