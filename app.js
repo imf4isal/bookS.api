@@ -109,6 +109,41 @@ const deleteSummary = (req, res) => {
   });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'functionality not defined.',
+  });
+};
+
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'functionality not defined.',
+  });
+};
+
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'functionality not defined.',
+  });
+};
+
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'functionality not defined.',
+  });
+};
+
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'functionality not defined.',
+  });
+};
+
 app.route('/api/v1/books').get(getAllBooks).post(createSummary);
 
 app
@@ -116,6 +151,14 @@ app
   .get(getBook)
   .patch(updateSummary)
   .delete(deleteSummary);
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+
+app
+  .route('/api/v1/books/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 // running application at particular port
 const port = 3000;
