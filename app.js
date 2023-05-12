@@ -7,9 +7,13 @@ const bookRouter = require('./routes/bookRouter');
 const userRouter = require('./routes/userRouter');
 
 //middleware
-app.use(morgan('dev'));
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('dev'));
+}
 
 app.use(express.json());
+app.use(express.static(`${__dirname}/public`));
 
 app.use((req, res, next) => {
   console.log('hello.');
