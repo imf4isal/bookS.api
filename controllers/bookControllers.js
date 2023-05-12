@@ -27,6 +27,16 @@ exports.getAllBooks = (req, res) => {
   });
 };
 
+exports.checkBookData = (req, res, next) => {
+  if (!req.body.name || !req.body.author) {
+    return res.status(400).json({
+      status: 'error',
+      message: 'invalid data. check again',
+    });
+  }
+  next();
+};
+
 exports.getBook = (req, res) => {
   const id = req.params.id * 1;
   const book = books.find((b) => b.id === id);

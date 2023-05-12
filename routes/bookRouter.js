@@ -9,7 +9,7 @@ router.param('id', bookControllers.checkIdValidation);
 router
   .route('/')
   .get(bookControllers.getAllBooks)
-  .post(bookControllers.createSummary);
+  .post(bookControllers.checkBookData, bookControllers.createSummary);
 router
   .route('/:id')
   .get(bookControllers.getBook)
