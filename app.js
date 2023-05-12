@@ -144,21 +144,23 @@ const deleteUser = (req, res) => {
   });
 };
 
-app.route('/api/v1/books').get(getAllBooks).post(createSummary);
+// Router Mounting
 
-app
-  .route('/api/v1/books/:id')
+const bookRouter = express.Router();
+const userRouter = express.Router();
+
+bookRouter.route('/').get(getAllBooks).post(createSummary);
+bookRouter
+  .route('/:id')
   .get(getBook)
   .patch(updateSummary)
   .delete(deleteSummary);
 
-app.route('/api/v1/users').get(getAllUsers).post(createUser);
+userRouter.route('/').get(getAllUsers).post(createUser);
+userRouter.route('/').get(getUser).patch(updateUser).delete(deleteUser);
 
-app
-  .route('/api/v1/books/:id')
-  .get(getUser)
-  .patch(updateUser)
-  .delete(deleteUser);
+app.use('/api/v1/books', bookRouter);
+app.use('/api/v1/users', userRouter);
 
 // running application at particular port
 const port = 3000;
