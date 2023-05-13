@@ -4,12 +4,10 @@ const bookControllers = require('../controllers/bookControllers');
 
 const router = express.Router();
 
-router.param('id', bookControllers.checkIdValidation);
-
 router
   .route('/')
   .get(bookControllers.getAllBooks)
-  .post(bookControllers.checkBookData, bookControllers.createSummary);
+  .post(bookControllers.createSummary);
 router
   .route('/:id')
   .get(bookControllers.getBook)
