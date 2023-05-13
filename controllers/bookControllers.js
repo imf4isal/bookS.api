@@ -2,7 +2,6 @@ const Book = require('./../models/bookModel');
 
 exports.getAllBooks = async (req, res) => {
   try {
-    console.log(req.query);
     const queryObj = { ...req.query };
     const excludeQ = ['sort', 'page', 'limit', 'fields'];
     excludeQ.forEach((el) => delete queryObj[el]);
