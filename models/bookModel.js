@@ -19,7 +19,7 @@ const bookSchema = new mongoose.Schema({
     required: true,
   },
   categories: {
-    type: String,
+    type: [String],
     required: true,
   },
   summary: {
@@ -27,8 +27,12 @@ const bookSchema = new mongoose.Schema({
     required: true,
   },
   summaryWriter: String,
-  writingAt: Date,
-  updatedAt: Date,
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+    select: false, // will not show this field at response
+  },
+  // updatedAt: Date,
   readingTime: Number,
   rating: {
     type: Number,
@@ -37,7 +41,6 @@ const bookSchema = new mongoose.Schema({
   ratingsQuantity: Number,
   topQuotes: {
     type: [String],
-    default: [],
   },
 });
 

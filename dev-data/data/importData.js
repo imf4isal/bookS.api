@@ -26,6 +26,18 @@ const importData = async () => {
   } catch (error) {
     console.log(error);
   }
+  process.exit();
 };
 
-console.log(books);
+const deleteData = async () => {
+  try {
+    await Book.deleteMany();
+    console.log('all summaries successfully deleted.');
+  } catch (error) {
+    console.log(error);
+  }
+  process.exit();
+};
+
+if (process.argv[2] === '--import') importData();
+if (process.argv[2] === '--delete') deleteData();

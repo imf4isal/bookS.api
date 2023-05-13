@@ -2,9 +2,38 @@ const Book = require('./../models/bookModel');
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const books = await Book.find();
+    console.log(req.query);
+    const queryObj = { ...req.query };
+    const excludeQ = ['sort', 'page', 'limit', 'fields'];
+    excludeQ.forEach((el) => delete queryObj[el]);
+
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.replace(
+      /\b(gte|gt|lte|lt|in)\b/g,
+      (match) => `$${match}`
+    );
+
+    let query = Book.find(JSON.parse(queryStr));
+
+    //sorting
+    if (req.query.sort) {
+      const sortEl = req.query.sort.split(',').join(' ');
+      query.sort(sortEl);
+    }
+
+    //particular fields // projecting
+    if (req.query.fields) {
+      const fields = req.query.fields.split(',').join(' ');
+      query = query.select(fields);
+    } else {
+      query = query.select('-__v');
+    }
+
+    const books = await query;
+
     res.status(200).json({
       status: 'success',
+      results: books.length,
       data: {
         books,
       },
