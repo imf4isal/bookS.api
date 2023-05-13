@@ -1,0 +1,150 @@
+[
+  {
+    "title": "Atomic Habit",
+    "author": "James Clear",
+    "coverImage": "cover-1.jpg",
+    "about": "This book is a practical guide on how to develop good habits and break bad ones. James Clear presents a framework for creating lasting changes in your life by focusing on small, incremental improvements.",
+    "categories": ["productivity", "selfhelp", "habit"],
+    "summary": "Atomic Habits is a comprehensive guide that covers the science of habit formation and provides practical strategies to help readers build good habits and break bad ones. \n The book explains how small changes in behavior can compound over time to create significant results. Clear outlines a four-step framework for creating and maintaining good habits: make it obvious, make it attractive, make it easy, and make it satisfying. He also explains how to identify and eliminate bad habits by understanding the cues, cravings, and rewards that drive them. With practical examples and actionable advice, this book is a must-read for anyone looking to make positive changes in their life.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.8,
+    "ratingsQuantity": 231,
+    "top quotes": [
+      "You do not rise to the level of your goals. You fall to the level of your systems.",
+      "Habits are the compound interest of self-improvement.",
+      "The most effective way to change your habits is to focus not on what you want to achieve, but on who you wish to become."
+    ]
+  },
+  {
+    "title": "Deep Work",
+    "author": "Cal Newport",
+    "coverImage": "cover-2.jpg",
+    "about": "Deep Work is a book that explores the benefits of focused work and the dangers of constant distraction. Cal Newport argues that the ability to concentrate deeply is becoming increasingly rare and valuable in today's economy.",
+    "categories": ["productivity", "selfhelp", "time management"],
+    "summary": " In Deep Work, Newport argues that the ability to concentrate deeply is becoming increasingly rare and valuable in today's economy. He presents a compelling case for why deep work is important and provides practical strategies for achieving it. \n The book covers topics such as how to eliminate distractions, how to structure your workday for maximum productivity, and how to build deep work habits. Newport also discusses the benefits of deep work, such as increased creativity and a deeper understanding of complex ideas. With insights from psychology, neuroscience, and philosophy, Deep Work is a thought-provoking and practical guide to achieving more in less time.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.2,
+    "ratingsQuantity": 131,
+    "top quotes": [
+      "The ability to perform deep work is becoming increasingly rare at exactly the same time it is becoming increasingly valuable in our economy.",
+      "The most valuable work requires the deepest concentration."
+    ]
+  },
+  {
+    "title": "Make Time",
+    "author": "Jake Knapp",
+    "coverImage": "cover-3.jpg",
+    "about": "Make Time is a book that provides practical strategies for making time for the things that matter most in your life. Jake Knapp and John Zeratsky share their personal stories and experiences to help readers create more space for the things they love.",
+    "categories": ["productivity", "time management"],
+    "summary": "Make Time is a practical guide to creating more time for the things that matter most in your life. The authors, Jake Knapp and John Zeratsky, share their personal stories and experiences to help readers understand the importance of making time for the things they love. \n The book presents a four-step framework for creating more space in your life: highlight, laser, energize, and reflect. Each step is accompanied by practical strategies and tips for making it work in your own life. With humor, empathy, and practical advice, Make Time is a valuable resource for anyone looking to reclaim their time and focus on what truly matters.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18t",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 15,
+    "ratings": 4.6,
+    "ratingsQuantity": 211,
+    "top quotes": [
+      "The most important habit for creative thinkers is to allow for uninterrupted time.",
+      "When you give your attention to anything, it becomes more interesting and meaningful.",
+      "When you take control of your attention, you take control of your life."
+    ]
+  },
+  {
+    "title": "Zero To One",
+    "author": "Peter Thiel",
+    "coverImage": "cover-4.jpg",
+    "about": " Zero To One is a book that presents a contrarian view on innovation and entrepreneurship. Peter Thiel argues that true innovation is about creating something new and valuable that did not exist before, rather than just copying what already exists.",
+    "categories": ["business", "startup"],
+    "summary": "In Zero To One, Peter Thiel presents his philosophy on innovation and entrepreneurship. He argues that progress is not about making incremental improvements to existing products or services, but about creating something completely new that adds value to the world. \n Thiel explores the characteristics of successful startups and provides insights on how to create a successful business from scratch. He also discusses the importance of building a strong team, creating a unique value proposition, and developing a long-term vision. With practical advice and thought-provoking insights, Zero To One is a must-read for entrepreneurs and innovators.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.8,
+    "ratingsQuantity": 231,
+    "top quotes": [
+      "Excepteur sint occaecat cupidatat non proident",
+      "Lorem ipsum dolor sit amet",
+      "consectetur adipisicing elit"
+    ]
+  },
+  {
+    "title": "Shoe Dog",
+    "author": "Phil Knight",
+    "coverImage": "cover-5.jpg",
+    "about": "Shoe Dog is a memoir by Nike co-founder Phil Knight, detailing the company's early days and rise to global success. It's a story of determination, innovation, and risk-taking.",
+    "categories": ["business", "biography"],
+    "summary": "Shoe Dog is a memoir that follows Phil Knight's journey from selling shoes out of the trunk of his car to building one of the most successful and iconic brands in the world. The book provides a candid look at the early days of Nike and the challenges Knight faced in starting and growing the company. \n It's a story of determination, innovation, and risk-taking, as Knight and his team overcome countless obstacles to bring their vision to life. With colorful anecdotes and vivid storytelling, Shoe Dog is a captivating read for anyone interested in entrepreneurship and the power of perseverance.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.8,
+    "ratingsQuantity": 231,
+    "top quotes": [
+      "Play by the rules, but be ferocious.",
+      "The cowards never started, and the weak died along the way. That leaves us, ladies and gentlemen. Us.",
+      "You must forget your limits. You must forget your doubts, your pain, your past."
+    ]
+  },
+  {
+    "title": "The Lean StartUp",
+    "author": "Eric Ries",
+    "coverImage": "cover-6.jpg",
+    "about": "The Lean StartUp is a guide to building and scaling a successful startup. Eric Ries presents a methodology for developing products and services that meet the needs of customers while minimizing waste and maximizing efficiency.",
+    "categories": ["business", "startup"],
+    "summary": "The Lean StartUp presents a methodology for building and scaling successful startups. Eric Ries introduces the concept of a minimum viable product (MVP) and explains how to use it to test and validate business ideas quickly and efficiently. \n He also discusses the importance of continuous improvement, feedback loops, and data-driven decision making. The book provides practical advice on everything from customer development to product design to organizational culture. With real-world examples and actionable advice, The Lean StartUp is a valuable resource for entrepreneurs and anyone interested in building successful businesses.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.8,
+    "ratingsQuantity": 231,
+    "top quotes": [
+      "The only way to win is to learn faster than anyone else.",
+      "The biggest risk is not taking any risk."
+    ]
+  },
+  {
+    "title": "Show Your Work",
+    "author": "Austin Kleon",
+    "coverImage": "cover-7.jpg",
+    "about": "Show Your Work is a guide to sharing your creative work with the world. Austin Kleon presents a set of principles and strategies for building an audience, promoting your work, and connecting with others.",
+    "categories": ["creativity"],
+    "summary": " Show Your Work is a practical guide to building an audience and promoting your creative work. Austin Kleon presents a set of principles and strategies for sharing your work with the world, including how to find your voice, how to develop a creative process, and how to use social media effectively. The book encourages readers to be generous, curious, and authentic in their interactions with others. With plenty of examples and practical tips, Show Your Work is a must-read for anyone looking to share their creativity with the world.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.8,
+    "ratingsQuantity": 231,
+    "top quotes": [
+      "The process is the product.",
+      "Share what you love, and the people who love the same things will find you."
+    ]
+  },
+  {
+    "title": "Steal Like an Artist",
+    "author": "Austin Kleon",
+    "coverImage": "cover-8.jpg",
+    "about": "Steal Like an Artist is a guide to creativity and inspiration. Austin Kleon argues that all creative work is a result of borrowing and remixing ideas, and encourages readers to embrace this process as a way to fuel their own creativity.",
+    "categories": ["creativity"],
+    "summary": " Steal Like an Artist is a fun and inspiring guide to creativity. Austin Kleon argues that all creative work is influenced by what came before it, and that nothing is truly original. He encourages readers to embrace this idea and to actively seek out inspiration from a wide range of sources. \n The book provides practical advice on everything from developing a creative routine to overcoming creative blocks to sharing your work with the world. With its playful tone and engaging illustrations, Steal Like an Artist is a quick and enjoyable read for anyone looking to tap into their creative potential.",
+    "summaryWriter": "5c8a22c62f8fb814b56fa18b",
+    "writingAt": "Date",
+    "updatedAt": "Date",
+    "readingTime": 25,
+    "ratings": 4.8,
+    "ratingsQuantity": 231,
+    "top quotes": [
+      "Draw the art you want to see, start the business you want to run.",
+      "Don't wait until you know who you are to get started."
+    ]
+  }
+]
