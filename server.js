@@ -18,22 +18,22 @@ mongoose
     console.log('connection established');
   });
 
-// const bookSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: [true, 'A book must have name.'],
-//   },
-//   author: {
-//     type: String,
-//     required: [true, 'Book must have author.'],
-//   },
-//   rating: {
-//     type: Number,
-//     default: 4.5,
-//   },
-// });
+const bookSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, 'A book must have name.'],
+  },
+  author: {
+    type: String,
+    required: [true, 'Book must have author.'],
+  },
+  rating: {
+    type: Number,
+    default: 4.5,
+  },
+});
 
-// const Book = mongoose.model('Book', bookSchema);
+const Book = mongoose.model('Book', bookSchema);
 
 const port = process.env.PORT;
 app.listen(port, () => {
