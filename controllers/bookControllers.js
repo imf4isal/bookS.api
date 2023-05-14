@@ -28,6 +28,15 @@ exports.getAllBooks = async (req, res) => {
       query = query.select('-__v');
     }
 
+    //pagination
+
+    const page = req.query.page * 1 || 1;
+    const limit = req.query.limit * 1 || 50;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    //execute query
     const books = await query;
 
     res.status(200).json({
