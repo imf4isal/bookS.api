@@ -1,48 +1,26 @@
 const Book = require('./../models/bookModel');
+const APIFeatures = require('./../utils/apiFeatures');
+
+exports.aliasTopBooks = (req, res, next) => {
+  req.query.sort = '-rating';
+  req.query.limit = '5';
+
+  console.log('top books');
+  console.log(req.query);
+
+  next();
+};
 
 exports.getAllBooks = async (req, res) => {
   try {
-    const queryObj = { ...req.query };
-    const excludeQ = ['sort', 'page', 'limit', 'fields'];
-    excludeQ.forEach((el) => delete queryObj[el]);
-
-    let queryStr = JSON.stringify(queryObj);
-    queryStr = queryStr.replace(
-      /\b(gte|gt|lte|lt|in)\b/g,
-      (match) => `$${match}`
-    );
-
-    let query = Book.find(JSON.parse(queryStr));
-
-    //sorting
-    if (req.query.sort) {
-      const sortEl = req.query.sort.split(',').join(' ');
-      query.sort(sortEl);
-    }
-
-    //particular fields // projecting
-    if (req.query.fields) {
-      const fields = req.query.fields.split(',').join(' ');
-      query = query.select(fields);
-    } else {
-      query = query.select('-__v');
-    }
-
-    //pagination
-
-    const page = req.query.page * 1 || 1;
-    const limit = req.query.limit * 1 || 50;
-    const skip = (page - 1) * limit;
-
-    query = query.skip(skip).limit(limit);
-
-    if (req.query.page) {
-      const numOfBooks = await Book.countDocuments();
-
-      if (skip >= numOfBooks) throw new Error('This page doesnt exist.');
-    }
     //execute query
-    const books = await query;
+    const features = new APIFeatures(Book.find(), req.query)
+      .filter()
+      .sort()
+      .project()
+      .pagination();
+
+    const books = await features.query;
 
     res.status(200).json({
       status: 'success',
