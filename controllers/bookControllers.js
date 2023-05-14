@@ -36,6 +36,11 @@ exports.getAllBooks = async (req, res) => {
 
     query = query.skip(skip).limit(limit);
 
+    if (req.query.page) {
+      const numOfBooks = await Book.countDocuments();
+
+      if (skip >= numOfBooks) throw new Error('This page doesnt exist.');
+    }
     //execute query
     const books = await query;
 
