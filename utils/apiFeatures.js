@@ -47,12 +47,6 @@ class APIFeatures {
 
     this.query = this.query.skip(skip).limit(limit);
 
-    // if (this.queryString.page) {
-    //   const numOfBooks = await Book.countDocuments();
-
-    //   if (skip >= numOfBooks) throw new Error('This page doesnt exist.');
-    // }
-
     return this;
   }
 }
