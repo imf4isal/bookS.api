@@ -19,6 +19,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Provide a password.'],
     minlength: 4,
+    select: false,
   },
   confirmedPass: {
     type: String,
@@ -32,6 +33,7 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+//encrypt password before saving it into database
 userSchema.pre('save', async function (next) {
   if (!this.isModified('password')) return next();
 
