@@ -2,13 +2,11 @@ const AppError = require('../utils/appError');
 
 const handleInvalidIdError = (err) => {
   const message = `Invalid Id: ${err.value}`;
-
   return new AppError(message, 400);
 };
 
 const handleDuplicationError = () => {
   const message = 'Duplicate Field Name.';
-
   return new AppError(message, 500);
 };
 
@@ -42,7 +40,6 @@ module.exports = (err, req, res, next) => {
     if (error.kind === 'ObjectId') error = handleInvalidIdError(error);
     if (error.code === 11000) error = handleDuplicationError();
 
-    console.log(error);
     productionError(error, res);
   }
 };
