@@ -1,3 +1,4 @@
+const AppError = require('../utils/appError');
 const Book = require('./../models/bookModel');
 const APIFeatures = require('./../utils/apiFeatures');
 
@@ -54,16 +55,25 @@ exports.getBook = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateSummary = catchAsync((req, res, next) => {
+exports.updateSummary = catchAsync(async (req, res, next) => {
+  const summary = await Book.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+
+  if (!summary) {
+    return next(new AppError(`couldn't find the data for this id.`, 404));
+  }
+
   res.status(200).json({
     status: 'success',
     data: {
-      book: '<updated book>',
+      summary,
     },
   });
 });
 
-exports.deleteSummary = catchAsync((req, res) => {
+exports.deleteSummary = catchAsync((req, res, next) => {
   res.status(204).json({
     status: 'success',
     data: null,
