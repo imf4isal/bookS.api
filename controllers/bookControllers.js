@@ -11,6 +11,21 @@ exports.aliasTopBooks = (req, res, next) => {
   next();
 };
 
+const catchAsync = (func) => {
+  return (req, res, next) => func(req, res, next).catch(next);
+};
+
+exports.createSummary = catchAsync(async (req, res, next) => {
+  const book = await Book.create(req.body);
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      book,
+    },
+  });
+});
+
 exports.getAllBooks = async (req, res) => {
   try {
     //execute query
@@ -50,24 +65,6 @@ exports.getBook = async (req, res) => {
     res.status(404).json({
       status: 'error',
       message: 'invalid request. Book not found.',
-    });
-  }
-};
-
-exports.createSummary = async (req, res) => {
-  try {
-    const book = await Book.create(req.body);
-
-    res.status(200).json({
-      status: 'success',
-      data: {
-        book,
-      },
-    });
-  } catch (error) {
-    res.status(400).json({
-      status: 'fail',
-      data: error,
     });
   }
 };
