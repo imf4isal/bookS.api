@@ -6,7 +6,7 @@ const app = express();
 const bookRouter = require('./routes/bookRouter');
 const userRouter = require('./routes/userRouter');
 const AppError = require('./utils/appError');
-const errorHandler = require('./controllers/errorHandler');
+const errorHandler = require('./controllers/errorController');
 
 //middleware
 
