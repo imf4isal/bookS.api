@@ -73,7 +73,15 @@ exports.updateSummary = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteSummary = catchAsync((req, res, next) => {
+exports.deleteSummary = catchAsync(async (req, res, next) => {
+  const summary = await Book.findByIdAndDelete(req.params.id);
+
+  if (!summary) {
+    return next(
+      new AppError(`couldn't find the summary for this id to delete.`, 404)
+    );
+  }
+
   res.status(204).json({
     status: 'success',
     data: null,
