@@ -26,61 +26,46 @@ exports.createSummary = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getAllBooks = async (req, res) => {
-  try {
-    //execute query
-    const features = new APIFeatures(Book.find(), req.query)
-      .filter()
-      .sort()
-      .project()
-      .pagination();
+exports.getAllBooks = catchAsync(async (req, res, next) => {
+  const features = new APIFeatures(Book.find(), req.query)
+    .filter()
+    .sort()
+    .project()
+    .pagination();
 
-    const books = await features.query;
+  const books = await features.query;
 
-    res.status(200).json({
-      status: 'success',
-      results: books.length,
-      data: {
-        books,
-      },
-    });
-  } catch (error) {
-    res.status(404).json({
-      status: 'error',
-      message: 'invalid request.',
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    results: books.length,
+    data: {
+      books,
+    },
+  });
+});
 
-exports.getBook = async (req, res) => {
-  try {
-    const book = await Book.findById(req.params.id);
-    res.status(200).json({
-      status: 'success',
-      data: {
-        book,
-      },
-    });
-  } catch (error) {
-    res.status(404).json({
-      status: 'error',
-      message: 'invalid request. Book not found.',
-    });
-  }
-};
+exports.getBook = catchAsync(async (req, res, next) => {
+  const book = await Book.findById(req.params.id);
+  res.status(200).json({
+    status: 'success',
+    data: {
+      book,
+    },
+  });
+});
 
-exports.updateSummary = (req, res) => {
+exports.updateSummary = catchAsync((req, res, next) => {
   res.status(200).json({
     status: 'success',
     data: {
       book: '<updated book>',
     },
   });
-};
+});
 
-exports.deleteSummary = (req, res) => {
+exports.deleteSummary = catchAsync((req, res) => {
   res.status(204).json({
     status: 'success',
     data: null,
   });
-};
+});
