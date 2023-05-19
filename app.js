@@ -6,6 +6,7 @@ const app = express();
 const bookRouter = require('./routes/bookRouter');
 const userRouter = require('./routes/userRouter');
 const AppError = require('./utils/appError');
+const errorHandler = require('./controllers/errorHandler');
 
 //middleware
 
@@ -39,14 +40,6 @@ app.all('*', (req, res, next) => {
   next(new AppError(`Couldn't find ${req.originalUrl} on server.`, 404));
 });
 
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
-
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-  });
-});
+app.use(errorHandler);
 
 module.exports = app;
