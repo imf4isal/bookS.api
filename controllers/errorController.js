@@ -6,6 +6,12 @@ const handleInvalidIdError = (err) => {
   return new AppError(message, 400);
 };
 
+const handleDuplicationError = () => {
+  const message = 'Duplicate Field Name.';
+
+  return new AppError(message, 500);
+};
+
 const developmentError = (err, res) => {
   res.status(err.statusCode).json({
     status: err.status,
@@ -34,7 +40,9 @@ module.exports = (err, req, res, next) => {
     let error = { ...err };
 
     if (error.kind === 'ObjectId') error = handleInvalidIdError(error);
+    if (error.code === 11000) error = handleDuplicationError();
 
+    console.log(error);
     productionError(error, res);
   }
 };
