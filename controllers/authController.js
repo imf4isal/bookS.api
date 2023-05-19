@@ -40,8 +40,8 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select('+password');
 
-  if (!user) {
-    return next(new AppError('invalid email.not found.', 400));
+  if (!user || !(await user.correctPassword(password, user.password))) {
+    return next(new AppError('Invalid email or password.', 400));
   }
 
   // TODO: create and provide token to the client
