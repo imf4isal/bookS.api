@@ -1,6 +1,7 @@
 const AppError = require('../utils/appError');
 const Book = require('./../models/bookModel');
 const APIFeatures = require('./../utils/apiFeatures');
+const catchAsync = require('./../utils/catchAsync');
 
 exports.aliasTopBooks = (req, res, next) => {
   req.query.sort = '-rating';
@@ -10,10 +11,6 @@ exports.aliasTopBooks = (req, res, next) => {
   console.log(req.query);
 
   next();
-};
-
-const catchAsync = (func) => {
-  return (req, res, next) => func(req, res, next).catch(next);
 };
 
 exports.createSummary = catchAsync(async (req, res, next) => {
