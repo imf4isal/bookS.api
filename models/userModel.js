@@ -36,21 +36,23 @@ const userSchema = new mongoose.Schema({
 
 //encrypt password before saving it into database
 userSchema.pre('save', async function (next) {
+  // Only run this function if password was actually modified
   if (!this.isModified('password')) return next();
 
+  // Hash the password with cost of 12
   this.password = await bcrypt.hash(this.password, 12);
 
-  this.confirmedPass = undefined;
+  // Delete passwordConfirm field
+  this.passwordConfirm = undefined;
   next();
 });
 
-userSchema.pre('save', function (next) {
-  if (!this.isModified('password') || this.isNew) return next();
+// userSchema.pre('save', function (next) {
+//   if (!this.isModified('password') || this.isNew) return next();
 
-  this.passwordChangedAt = Date.now() - 1000;
-
-  next();
-});
+//   this.passwordChangedAt = Date.now() - 1000;
+//   next();
+// });
 
 userSchema.methods.correctPassword = async function (
   candidatePassword,
@@ -65,7 +67,8 @@ userSchema.methods.isPassChanged = function (jwtTimeStamp) {
       this.passwordChangedAt.getTime() / 1000,
       10
     );
-    return jwtTimeStamp < passwordChangedAt;
+    console.log(jwtTimeStamp, changePassTimeStamp);
+    return jwtTimeStamp < changePassTimeStamp;
   }
   return false;
 };

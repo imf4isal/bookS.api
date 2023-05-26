@@ -6,7 +6,7 @@ const AppError = require('../utils/appError');
 
 const generateJWT = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
+    expiresIn: '1d',
   });
 };
 
@@ -17,6 +17,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     email: req.body.email,
     password: req.body.password,
     confirmedPass: req.body.confirmedPass,
+    passwordChangedAt: req.body.passwordChangedAt,
   });
 
   const token = generateJWT(newUser._id);
@@ -66,8 +67,9 @@ exports.protect = catchAsync(async (req, res, next) => {
     token = req.headers.authorization.split(' ')[1];
   }
 
+  console.log(token);
+
   if (!token) return next(new AppError('You are not logged in.', 404));
-  else console.log(token);
 
   // verified the token
   const decoded = await promisify(jwt.verify)(
@@ -76,6 +78,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   );
 
   const currentUser = await User.findById(decoded.id);
+
   if (!currentUser) {
     return next(
       new AppError(
@@ -85,6 +88,12 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  console.log(decoded, currentUser);
+  if (currentUser.isPassChanged(decoded.iat)) {
+    return next(
+      new AppError('User recently changed password! Please log in again.', 401)
+    );
+  }
+
+  req.user = currentUser;
   next();
 });
