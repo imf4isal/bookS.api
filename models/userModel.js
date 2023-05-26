@@ -31,6 +31,7 @@ const userSchema = new mongoose.Schema({
       message: 'Password has not been confirmed.',
     },
   },
+  passwordChangedAt: Date,
 });
 
 //encrypt password before saving it into database
@@ -42,11 +43,25 @@ userSchema.pre('save', async function (next) {
   this.confirmedPass = undefined;
 });
 
+userSchema.pre('save', function (next) {
+  if (!this.isModified('password') || this.isNew) return next();
+
+  this.passwordChangedAt = Date.now();
+
+  next();
+});
+
 userSchema.methods.correctPassword = async function (
   candidatePassword,
   originalPassword
 ) {
   return await bcrypt.compare(candidatePassword, originalPassword);
+};
+
+userSchema.methods.isPassChanged = function (jwtTimeStamp) {
+  if (this.passwordChangedAt) {
+    return jwtTimeStamp < passwordChangedAt;
+  }
 };
 
 const User = mongoose.model('User', userSchema);

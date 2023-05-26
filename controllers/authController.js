@@ -67,6 +67,7 @@ exports.protect = catchAsync(async (req, res, next) => {
   }
 
   if (!token) return next(new AppError('You are not logged in.', 404));
+  else console.log(token);
 
   // verified the token
   const decoded = await promisify(jwt.verify)(
@@ -84,6 +85,6 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
-  console.log(currentUser);
+  console.log(decoded, currentUser);
   next();
 });
