@@ -1,12 +1,17 @@
 const User = require('./../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 
-exports.getAllUsers = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'functionality not defined.',
+exports.getAllUsers = catchAsync(async (req, res) => {
+  const users = await User.find();
+
+  res.status(200).json({
+    status: 'success',
+    data: {
+      results: users.length,
+      users,
+    },
   });
-};
+});
 
 exports.getUser = (req, res) => {
   res.status(500).json({
@@ -23,9 +28,8 @@ exports.createUser = (req, res) => {
 };
 
 exports.updateUser = catchAsync(async (req, res) => {
-  const user = await Book.findByIdAndUpdate(req.params.id, req.body, {
+  const user = await User.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
-    runValidators: true,
   });
 
   if (!user) {
