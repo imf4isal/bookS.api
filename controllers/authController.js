@@ -4,6 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const User = require('./../models/userModel');
 const AppError = require('../utils/appError');
 const sendEmail = require('./../utils/sendEmail');
+const crypto = require('crypto');
 
 const generateJWT = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET_KEY, {
@@ -108,11 +109,20 @@ exports.restrictTo = (...roles) => {
   };
 };
 
-exports.forgotPassword = catchAsync(async (req, res) => {
+exports.forgotPassword = catchAsync(async (req, res, next) => {
   // check if user exists
-  const user = User.findOne({ email: req.body.email });
-  if (!user)
+  if (!req.body.email) {
+    res.status(400).json({
+      message: 'Invalid Email.',
+    });
+  }
+  const user = await User.findOne({ email: req.body.email });
+
+  console.log(user);
+
+  if (!user) {
     return next(new AppError('User with this email does not exist.', 404));
+  }
 
   // generate random password reset token
   const resetToken = user.createPasswordResetToken();
@@ -149,4 +159,37 @@ exports.forgotPassword = catchAsync(async (req, res) => {
   }
 });
 
-exports.resetPassword = catchAsync(async (req, res) => {});
+exports.resetPassword = catchAsync(async (req, res, next) => {
+  const hashedResetToken = crypto
+    .createHash('sha256')
+    .update(req.params.token)
+    .digest('hex');
+
+  const user = await User.findOne({
+    passwordResetToken: hashedResetToken,
+    passwordResetExpire: { $gt: Date.now() },
+  });
+
+  if (!user) {
+    return next(
+      new AppError(
+        'Invalid Reset Token or Token has been expired. Try Again',
+        404
+      )
+    );
+  }
+
+  user.password = req.body.password;
+  user.confirmedPass = req.body.confirmedPass;
+  user.passwordResetToken = undefined;
+  user.passwordResetExpire = undefined;
+
+  await user.save();
+
+  const token = generateJWT(user._id);
+  res.status(200).json({
+    status: 'success',
+    message: 'Password has been successfully reset.',
+    token,
+  });
+});
