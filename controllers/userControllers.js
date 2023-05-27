@@ -43,10 +43,20 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 
   res.status(200).json({
-    status: 'success',
+    status: 'Success',
     data: {
       user,
     },
+  });
+});
+
+exports.deleteMe = catchAsync(async (req, res, next) => {
+  await User.findByIdAndUpdate(req.user.id, { active: false });
+
+  res.status(200).json({
+    status: 'Success',
+    message: 'Account has been scheduled to be deleted.',
+    data: null,
   });
 });
 
