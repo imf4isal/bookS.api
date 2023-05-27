@@ -12,6 +12,17 @@ const generateJWT = (id) => {
   });
 };
 
+const createAndSendToken = (user, statusCode, res) => {
+  const token = generateJWT(user._id);
+  res.status(statusCode).json({
+    status: 'success',
+    token,
+    data: {
+      user,
+    },
+  });
+};
+
 exports.signup = catchAsync(async (req, res, next) => {
   const newUser = await User.create({
     //only allow selected field
@@ -23,15 +34,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     passwordChangedAt: req.body.passwordChangedAt,
   });
 
-  const token = generateJWT(newUser._id);
-
-  res.status(200).json({
-    status: 'success',
-    token,
-    data: {
-      newUser,
-    },
-  });
+  createAndSendToken(newUser, 200, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -50,12 +53,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   // create and provide token to the client
-  const token = generateJWT(user._id);
-
-  res.status(200).json({
-    status: 'success',
-    token,
-  });
+  createAndSendToken(user, 200, res);
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
@@ -186,16 +184,36 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   await user.save();
 
-  const token = generateJWT(user._id);
-  res.status(200).json({
-    status: 'success',
-    message: 'Password has been successfully reset.',
-    token,
-  });
+  createAndSendToken(user, 200, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user.id).select('+password');
 
-  console.log(user);
+  // check if fields are valid
+  if (
+    !req.body.passwordCurrent ||
+    !req.body.password ||
+    !req.body.confirmedPass
+  ) {
+    return next(
+      new AppError(
+        'Invalid Field for changing password, Recheck and Try again.',
+        401
+      )
+    );
+  }
+
+  // check if current password is correct
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Current Password is not correct', 404));
+  }
+
+  // change the password
+  user.password = req.body.password;
+  user.confirmedPass = req.body.confirmedPass;
+
+  await user.save();
+
+  createAndSendToken(user, 200, res);
 });
