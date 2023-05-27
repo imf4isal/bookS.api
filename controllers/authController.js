@@ -15,6 +15,7 @@ exports.signup = catchAsync(async (req, res, next) => {
     //only allow selected field
     name: req.body.name,
     email: req.body.email,
+    role: req.body.role,
     password: req.body.password,
     confirmedPass: req.body.confirmedPass,
     passwordChangedAt: req.body.passwordChangedAt,
@@ -56,8 +57,6 @@ exports.login = catchAsync(async (req, res, next) => {
 });
 
 exports.protect = catchAsync(async (req, res, next) => {
-  console.log(req.headers.authorization);
-
   // get the token
   let token;
   if (
@@ -66,8 +65,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
-
-  console.log(token);
 
   if (!token) return next(new AppError('You are not logged in.', 404));
 
@@ -97,3 +94,14 @@ exports.protect = catchAsync(async (req, res, next) => {
   req.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You do not have permission to perform this action.', 404)
+      );
+    }
+    next();
+  };
+};

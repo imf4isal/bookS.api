@@ -17,6 +17,10 @@ router
   .route('/:id')
   .get(bookControllers.getBook)
   .patch(bookControllers.updateSummary)
-  .delete(bookControllers.deleteSummary);
+  .delete(
+    authControllers.protect,
+    authControllers.restrictTo('admin', 'moderator'),
+    bookControllers.deleteSummary
+  );
 
 module.exports = router;
