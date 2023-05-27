@@ -91,6 +91,7 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
 
+  // carry user
   req.user = currentUser;
   next();
 });
@@ -105,3 +106,11 @@ exports.restrictTo = (...roles) => {
     next();
   };
 };
+
+exports.forgotPassword = catchAsync(async (req, res) => {
+  const user = User.findOne({ email: req.body.email });
+  if (!user)
+    return next(new AppError('User with this email does not exist.', 404));
+});
+
+exports.resetPassword = catchAsync(async (req, res) => {});
