@@ -43,10 +43,12 @@ exports.getAllBooks = catchAsync(async (req, res, next) => {
 });
 
 exports.getBook = catchAsync(async (req, res, next) => {
-  const book = await Book.findById(req.params.id).populate({
-    path: 'summaryWriter',
-    select: '-__v -passwordChangedAt',
-  });
+  const book = await Book.findById(req.params.id)
+    .populate({
+      path: 'summaryWriter',
+      select: '-__v -passwordChangedAt',
+    })
+    .populate('reviews');
 
   res.status(200).json({
     status: 'success',

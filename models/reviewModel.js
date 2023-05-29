@@ -36,10 +36,17 @@ const reviewSchema = new mongoose.Schema(
 );
 
 reviewSchema.pre(/^find/, function (next) {
+  //   this.populate({
+  //     path: 'book',
+  //     select: 'title',
+  //   }).populate({
+  //     path: 'reviewAuthor',
+  //     select: 'name',
+  //   });
+
+  this.select('-__v -createdAt');
+
   this.populate({
-    path: 'book',
-    select: 'title',
-  }).populate({
     path: 'reviewAuthor',
     select: 'name',
   });

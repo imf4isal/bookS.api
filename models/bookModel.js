@@ -53,6 +53,13 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
+// Virtual Populate
+bookSchema.virtual('reviews', {
+  ref: 'Review',
+  foreignField: 'book',
+  localField: '_id',
+});
+
 const Book = mongoose.model('Book', bookSchema);
 
 module.exports = Book;
