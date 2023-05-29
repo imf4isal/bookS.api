@@ -1,6 +1,7 @@
 const express = require('express');
 
 const bookControllers = require('../controllers/bookControllers');
+const reviewControllers = require('../controllers/reviewController');
 const authControllers = require('./../controllers/authController');
 
 const router = express.Router();
@@ -22,5 +23,9 @@ router
     authControllers.restrictTo('admin', 'moderator'),
     bookControllers.deleteSummary
   );
+
+router
+  .route('/:summaryId/reviews')
+  .post(authControllers.protect, reviewControllers.createReview);
 
 module.exports = router;
