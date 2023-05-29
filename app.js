@@ -8,13 +8,14 @@ const hpp = require('hpp');
 
 const app = express();
 
-const bookRouter = require('./routes/bookRouter');
-const userRouter = require('./routes/userRouter');
 const AppError = require('./utils/appError');
 const errorHandler = require('./controllers/errorController');
 
-//middleware
+const bookRouter = require('./routes/bookRouter');
+const userRouter = require('./routes/userRouter');
+const reviewRouter = require('./routes/reviewRouter');
 
+//middleware
 app.use(helmet());
 
 if (process.env.NODE_ENV === 'development') {
@@ -30,11 +31,8 @@ const limiter = rateLimit({
 });
 
 app.use('/api', limiter);
-
 app.use(express.json({ limit: '10kb' }));
-
 app.use(mongoSanitize());
-
 app.use(xss());
 
 // app.use(hpp({ whitelist: ['duration', 'ratingsQuantity', 'ratings'] }));
@@ -55,10 +53,13 @@ app.use((req, res, next) => {
 // Router Mounting
 app.use('/api/v1/books', bookRouter);
 app.use('/api/v1/users', userRouter);
+app.use('/api/v1/reviews', reviewRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Couldn't find ${req.originalUrl} on server.`, 404));
 });
 
+//global error handler
 app.use(errorHandler);
+
 module.exports = app;
