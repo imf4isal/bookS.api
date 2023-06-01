@@ -14,17 +14,6 @@ exports.aliasTopBooks = (req, res, next) => {
   next();
 };
 
-exports.createSummary = catchAsync(async (req, res, next) => {
-  const book = await Book.create(req.body);
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      book,
-    },
-  });
-});
-
 exports.getAllBooks = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Book.find(), req.query)
     .filter()
@@ -59,22 +48,6 @@ exports.getBook = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.updateSummary = catchAsync(async (req, res, next) => {
-  const summary = await Book.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
-
-  if (!summary) {
-    return next(new AppError(`couldn't find the data for this id.`, 404));
-  }
-
-  res.status(200).json({
-    status: 'success',
-    data: {
-      summary,
-    },
-  });
-});
-
+exports.createSummary = factory.createOne(Book);
+exports.updateSummary = factory.updateOne(Book);
 exports.deleteSummary = factory.deleteOne(Book);
