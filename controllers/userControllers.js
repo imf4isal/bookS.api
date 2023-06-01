@@ -1,6 +1,7 @@
 const User = require('./../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const factory = require('./factoryHandler');
 
 exports.getAllUsers = catchAsync(async (req, res) => {
   const users = await User.find();
@@ -91,9 +92,4 @@ exports.updateUser = catchAsync(async (req, res) => {
   });
 });
 
-exports.deleteUser = (req, res) => {
-  res.status(500).json({
-    status: 'error',
-    message: 'functionality not defined.',
-  });
-};
+exports.deleteUser = factory.deleteOne(User);

@@ -2,6 +2,7 @@ const AppError = require('../utils/appError');
 const Book = require('./../models/bookModel');
 const APIFeatures = require('./../utils/apiFeatures');
 const catchAsync = require('./../utils/catchAsync');
+const factory = require('./factoryHandler');
 
 exports.aliasTopBooks = (req, res, next) => {
   req.query.sort = '-rating';
@@ -76,17 +77,4 @@ exports.updateSummary = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.deleteSummary = catchAsync(async (req, res, next) => {
-  const summary = await Book.findByIdAndDelete(req.params.id);
-
-  if (!summary) {
-    return next(
-      new AppError(`couldn't find the summary for this id to delete.`, 404)
-    );
-  }
-
-  res.status(204).json({
-    status: 'success',
-    data: null,
-  });
-});
+exports.deleteSummary = factory.deleteOne(Book);
