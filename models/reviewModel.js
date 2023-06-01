@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Book = require('./bookModel');
 
 const reviewSchema = new mongoose.Schema(
   {
@@ -35,15 +36,9 @@ const reviewSchema = new mongoose.Schema(
   }
 );
 
-reviewSchema.pre(/^find/, function (next) {
-  //   this.populate({
-  //     path: 'book',
-  //     select: 'title',
-  //   }).populate({
-  //     path: 'reviewAuthor',
-  //     select: 'name',
-  //   });
+// reviewSchema.index({ book: 1, reviewAuthor: 1 }, { unique: true });
 
+reviewSchema.pre(/^find/, function (next) {
   this.select('-__v -createdAt');
 
   this.populate({
@@ -52,6 +47,33 @@ reviewSchema.pre(/^find/, function (next) {
   });
 
   next();
+});
+
+reviewSchema.statics.calculateRatings = async function (bookId) {
+  const stats = await this.aggregate([
+    {
+      $match: { book: bookId },
+    },
+    {
+      $group: {
+        _id: '$book',
+        nRating: { $sum: 1 },
+        avgRating: { $avg: '$rating' },
+      },
+    },
+  ]);
+
+  console.log(stats);
+  if (stats.length > 0) {
+    await Book.findByIdAndUpdate(bookId, {
+      ratingsQuantity: stats[0].nRating,
+      rating: stats[0].avgRating,
+    });
+  }
+};
+
+reviewSchema.post('save', function () {
+  this.constructor.calculateRatings(this.book);
 });
 
 const Review = mongoose.model('Review', reviewSchema);
