@@ -69,11 +69,25 @@ reviewSchema.statics.calculateRatings = async function (bookId) {
       ratingsQuantity: stats[0].nRating,
       rating: stats[0].avgRating,
     });
+  } else {
+    await Book.findByIdAndUpdate(bookId, {
+      ratingsQuantity: 0,
+      rating: 4.5,
+    });
   }
 };
 
 reviewSchema.post('save', function () {
   this.constructor.calculateRatings(this.book);
+});
+
+reviewSchema.pre(/^findOneAnd/, async function (next) {
+  this.rv = await this.findOne();
+  next();
+});
+
+reviewSchema.post(/^findOneAnd/, async function () {
+  await this.rv.constructor.calculateRatings(this.rv.book);
 });
 
 const Review = mongoose.model('Review', reviewSchema);
