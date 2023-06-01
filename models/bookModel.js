@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
+const slugify = require('slugify');
 
 const bookSchema = new mongoose.Schema(
   {
     title: {
       type: String,
-      required: [true, 'A book must have name.'],
+      required: [true, `Book's Title is missing.`],
       unique: true,
+      trim: true,
     },
+    slug: String,
     author: {
       type: String,
-      required: [true, 'Book must have author.'],
+      required: [true, `Book's author name is missing. `],
     },
     coverImage: {
       type: String,
@@ -17,15 +20,22 @@ const bookSchema = new mongoose.Schema(
     },
     about: {
       type: String,
-      required: true,
+      required: [true, `Book's brief description is missing. `],
     },
     categories: {
       type: [String],
-      required: true,
+      required: [true, `Select the category where the book belongs. `],
     },
     summary: {
       type: String,
-      required: true,
+      required: [true, `Write a valid summary.`],
+      validate: {
+        validator: function (summaryText) {
+          const wordCount = summaryText.trim().split(/\s+/).length;
+          return wordCount >= 20;
+        },
+        message: 'Summary should be at least of 500 words.',
+      },
     },
     summaryWriter: {
       type: mongoose.Schema.ObjectId,
@@ -53,11 +63,19 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
+bookSchema.index({ slug: 1 });
+bookSchema.index({ rating: 1 });
+
 // Virtual Populate
 bookSchema.virtual('reviews', {
   ref: 'Review',
   foreignField: 'book',
   localField: '_id',
+});
+
+bookSchema.pre('save', function (next) {
+  this.slug = slugify(this.title, { lower: true });
+  next();
 });
 
 const Book = mongoose.model('Book', bookSchema);
